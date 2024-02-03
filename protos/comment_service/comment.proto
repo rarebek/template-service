@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package comment;
+
+message Comment {
+  string id = 1;
+  string content = 2;
+  string post_id = 3;
+  string owner_id = 4;
+  string created_at = 5;
+  string updated_at = 6;
+  string deleted_at = 7;
+}
+
+message GetPostID {
+  string post_id = 1;
+}
+
+message GetOwnerID {
+  string owner_id = 1;
+}
+
+message AllComments {
+  repeated Comment comments = 1;
+}
+
+service CommentService {
+  rpc CreateComment(Comment) returns (Comment);
+  rpc GetAllCommentsByPostId(GetPostID) returns (AllComments);
+  rpc GetAllCommentsByOwnerId(GetOwnerID) returns (AllComments);
+}
+
+//get all users -> []users -> []user.posts -> []user.post.comments ->
